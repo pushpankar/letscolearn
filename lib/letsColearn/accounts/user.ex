@@ -3,11 +3,13 @@ defmodule LetsColearn.Accounts.User do
   import Ecto.Changeset
 
   alias LetsColearn.Accounts.Credential
+  alias LetsColearn.Cohorts.Cohort
 
   schema "users" do
     field :name, :string
     field :username, :string
     has_one :credential, Credential
+    many_to_many :cohorts, Cohort, join_through: "users_cohorts"
 
     timestamps()
   end

@@ -1,0 +1,5 @@
+<h2>Edit Cohort</h2>
+
+<%= render "form.html", Map.put(assigns, :action, cohort_path(@conn, :update, @cohort)) %>
+
+<span><%= link "Back", to: cohort_path(@conn, :index) %></span>

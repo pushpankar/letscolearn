@@ -1,0 +1,28 @@
+<h2>Listing Cohorts</h2>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+<%= for cohort <- @cohorts do %>
+    <tr>
+      <td><%= cohort.title %></td>
+      <td><%= cohort.description %></td>
+
+      <td class="text-right">
+        <span><%= link "Show", to: cohort_path(@conn, :show, cohort), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Edit", to: cohort_path(@conn, :edit, cohort), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Delete", to: cohort_path(@conn, :delete, cohort), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      </td>
+    </tr>
+<% end %>
+  </tbody>
+</table>
+
+<span><%= link "New Cohort", to: cohort_path(@conn, :new) %></span>

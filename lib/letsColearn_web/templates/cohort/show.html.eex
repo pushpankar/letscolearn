@@ -1,0 +1,18 @@
+<h2>Show Cohort</h2>
+
+<ul>
+
+  <li>
+    <strong>Title:</strong>
+    <%= @cohort.title %>
+  </li>
+
+  <li>
+    <strong>Description:</strong>
+    <%= @cohort.description %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: cohort_path(@conn, :edit, @cohort) %></span>
+<span><%= link "Back", to: cohort_path(@conn, :index) %></span>

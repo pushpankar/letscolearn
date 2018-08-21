@@ -18,6 +18,7 @@ defmodule LetsColearnWeb.Router do
 
     get "/", PageController, :index
     resources "/users", UserController
+    resources "/cohorts", CohortController
   end
 
   # Other scopes may use custom stacks.
