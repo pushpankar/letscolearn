@@ -2,7 +2,7 @@ defmodule LetsColearnWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", LetsColearnWeb.RoomChannel
+  channel "cohort:*", LetsColearnWeb.CohortChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
