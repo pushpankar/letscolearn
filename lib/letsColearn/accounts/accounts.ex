@@ -6,7 +6,7 @@ defmodule LetsColearn.Accounts do
   import Ecto.Query, warn: false
   alias LetsColearn.Repo
 
-  alias LetsColearn.Accounts.User
+  alias LetsColearn.Accounts.{User, Credential}
 
   @doc """
   Returns the list of users.
@@ -58,6 +58,7 @@ defmodule LetsColearn.Accounts do
   def create_user(attrs \\ %{}) do
     %User{}
     |> User.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
     |> Repo.insert()
   end
 
@@ -76,6 +77,7 @@ defmodule LetsColearn.Accounts do
   def update_user(%User{} = user, attrs) do
     user
     |> User.changeset(attrs)
+    |> Ecto.Changeset.cast_assoc(:credential, with: &Credential.changeset/2)
     |> Repo.update()
   end
 

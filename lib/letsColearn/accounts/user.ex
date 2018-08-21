@@ -7,7 +7,7 @@ defmodule LetsColearn.Accounts.User do
   schema "users" do
     field :name, :string
     field :username, :string
-    has_one :credential, Credentials
+    has_one :credential, Credential
 
     timestamps()
   end
