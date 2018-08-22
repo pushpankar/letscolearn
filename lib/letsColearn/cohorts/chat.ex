@@ -2,11 +2,13 @@ defmodule LetsColearn.Cohorts.Chat do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias LetsColearn.Accounts.User
+  alias LetsColearn.Cohorts.Cohort
 
   schema "chats" do
     field :message, :string
-    field :user_id, :id
-    field :group_id, :id
+    belongs_to :user, User
+    belongs_to :cohort, Cohort
 
     timestamps()
   end
@@ -14,7 +16,7 @@ defmodule LetsColearn.Cohorts.Chat do
   @doc false
   def changeset(chat, attrs) do
     chat
-    |> cast(attrs, [:message])
-    |> validate_required([:message])
+    |> cast(attrs, [:message, :user_id, :cohort_id])
+    |> validate_required([:message, :user_id, :cohort_id])
   end
 end
