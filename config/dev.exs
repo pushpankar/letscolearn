@@ -56,3 +56,7 @@ config :letsColearn, LetsColearn.Repo,
   database: "letscolearn_dev",
   hostname: "localhost",
   pool_size: 10
+
+
+config :guardian, Guardian,
+  secret_key: "lHLs0Cr6W1d82l6NxfB+VS0W3QfmlyEHu4snZLG4a/+9JijzcqVpKJzTwZs1ZwR4"
