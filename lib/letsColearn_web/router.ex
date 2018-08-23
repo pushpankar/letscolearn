@@ -13,14 +13,10 @@ defmodule LetsColearnWeb.Router do
     plug :accepts, ["json"]
   end
 
-  pipeline :maybe_browser_auth do
-    plug Guardian.Plug.Pipeline, module: LetsColearn.Guardian,
-                                 error_handler: MyApp.AuthErrorHandler
-    plug(Guardian.Plug.VerifySession)
-    plug(Guardian.Plug.VerifyHeader, realm: "Bearer")
-    plug(Guardian.Plug.LoadResource, allow_blank: true)
+  pipeline :auth do
+    plug LetsColearn.Pipeline
   end
-  
+
   pipeline :ensure_authed_access do
     plug(Guardian.Plug.EnsureAuthenticated, %{"typ" => "access", handler: LetsColearn.HttpErrorHandler})
   end
@@ -34,9 +30,10 @@ defmodule LetsColearnWeb.Router do
   end
 
   scope "/", LetsColearnWeb do
-    pipe_through [:browser, :maybe_browser_auth]
+    pipe_through [:browser, :auth]
     resources "/users", UserController
-    # , only: [:new, :show, :update, :create]
+    resources "/sessions", SessionController, only: [:new, :create, :delete],
+                                              singleton: true
   end
 
   # Other scopes may use custom stacks.

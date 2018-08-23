@@ -2,6 +2,7 @@ defmodule LetsColearn.Guardian do
     use Guardian, otp_app: :letsColearn
 
     alias LetsColearn.Accounts.User
+    alias LetsColearn.Accounts
     alias LetsColearn.Repo
 
     # def subject_for_token(user = %User{}), do: {:ok, "User:#{user.id}"}
@@ -28,7 +29,7 @@ defmodule LetsColearn.Guardian do
         # found in the `"sub"` key. In `above subject_for_token/2` we returned
         # the resource id so here we'll rely on that to look it up.
         id = claims["sub"]
-        resource = Repo.get(User, String.to_integer(id))
+        resource = Accounts.get_user!(id)
         {:ok,  resource}
       end
       def resource_from_claims(_claims) do

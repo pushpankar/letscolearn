@@ -28,6 +28,10 @@ config :letsColearn, LetsColearn.Guardian,
   ttl: {30, :days},
   verify_issuer: true
 
+config :letsColearn, LetsColearn.Guardian,
+  issuer: "letsColearn",
+  secret_key: "1qSr5u+j9D+pklujoD0LqjyRN7ceIlum5IVoPGbBDaH7DXc7X9gId1ltTeWO6AzL"
+
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env}.exs"
