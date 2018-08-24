@@ -30,6 +30,7 @@ defmodule LetsColearn.Guardian do
         # the resource id so here we'll rely on that to look it up.
         id = claims["sub"]
         resource = Accounts.get_user!(id)
+        resource = Repo.get(User, id)
         {:ok,  resource}
       end
       def resource_from_claims(_claims) do

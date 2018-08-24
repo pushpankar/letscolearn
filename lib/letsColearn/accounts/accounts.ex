@@ -108,6 +108,7 @@ defmodule LetsColearn.Accounts do
   """
   def change_user(%User{} = user) do
     User.changeset(user, %{})
+    |> Ecto.Changeset.put_assoc(:credential, change_credential(%Credential{}))
   end
 
   alias LetsColearn.Accounts.Credential

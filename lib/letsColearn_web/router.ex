@@ -18,7 +18,7 @@ defmodule LetsColearnWeb.Router do
   end
 
   pipeline :ensure_authed_access do
-    plug(Guardian.Plug.EnsureAuthenticated, %{"typ" => "access", handler: LetsColearn.HttpErrorHandler})
+    plug Guardian.Plug.EnsureAuthenticated, claims: %{"typ" => "access"}
   end
 
   scope "/", LetsColearnWeb do
@@ -31,9 +31,12 @@ defmodule LetsColearnWeb.Router do
 
   scope "/", LetsColearnWeb do
     pipe_through [:browser, :auth]
-    resources "/users", UserController
+    resources "/users", UserController, only: [:new, :create]
     resources "/sessions", SessionController, only: [:new, :create, :delete],
                                               singleton: true
+    
+    pipe_through [:ensure_authed_access]
+    resources "/users", UserController, except: [:new, :create, :delete]
   end
 
   # Other scopes may use custom stacks.

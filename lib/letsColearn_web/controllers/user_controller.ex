@@ -5,9 +5,6 @@ defmodule LetsColearnWeb.UserController do
   alias LetsColearn.Accounts.User
   alias LetsColearn.Guardian
 
-  require IEx
-
-
   def index(conn, _params) do
     users = Accounts.list_users()
     render(conn, "index.html", users: users)
@@ -21,9 +18,8 @@ defmodule LetsColearnWeb.UserController do
   def create(conn, %{"user" => user_params}) do
     case Accounts.create_user(user_params) do
       {:ok, user} ->
-        IEx.pry
         conn 
-        |> Guardian.Plug.sign_in(user)
+        |> Guardian.Plug.sign_in(user, %{}, token_type: "access")
         |> put_flash(:info, "User created successfully.")
         |> redirect(to: user_path(conn, :show, user))
       {:error, %Ecto.Changeset{} = changeset} ->
