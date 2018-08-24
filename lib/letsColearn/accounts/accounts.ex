@@ -111,6 +111,14 @@ defmodule LetsColearn.Accounts do
     |> Ecto.Changeset.put_assoc(:credential, change_credential(%Credential{}))
   end
 
+  def get_user_by_email(email) do
+    query = from u in User,
+              join: c in assoc(u, :credential),
+              where: c.email  == ^email,
+              preload: [credential: c]
+    Repo.one(query)
+  end
+
   alias LetsColearn.Accounts.Credential
 
   @doc """

@@ -1,4 +1,4 @@
-defmodule LetsColearn.SessionController do
+defmodule LetsColearnWeb.SessionController do
     use LetsColearnWeb, :controller
 
     alias LetsColearn.Accounts
@@ -17,12 +17,12 @@ defmodule LetsColearn.SessionController do
     end
   
   
-    def login(conn, params) do
-      Auth.authenticate_user(params)
+    def create(conn, params) do
+      Auth.authenticate(params)
       |> login_reply(conn)
     end
   
-    def logout(conn, _) do
+    def delete(conn, _) do
       conn
       |> Guardian.Plug.sign_out()
       |> redirect(to: "/login")

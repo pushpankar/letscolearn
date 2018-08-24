@@ -32,11 +32,14 @@ defmodule LetsColearnWeb.Router do
   scope "/", LetsColearnWeb do
     pipe_through [:browser, :auth]
     resources "/users", UserController, only: [:new, :create]
-    resources "/sessions", SessionController, only: [:new, :create, :delete],
-                                              singleton: true
+    # resources "/sessions", SessionController, only: [:new, :create, :delete],
+                                              # singleton: true
+    get    "/login",  SessionController, :new
+    post   "/login",  SessionController, :create
+    delete "/logout", SessionController, :delete
     
     pipe_through [:ensure_authed_access]
-    resources "/users", UserController, except: [:new, :create, :delete]
+    resources "/users", UserController, except: [:new, :create]
   end
 
   # Other scopes may use custom stacks.
