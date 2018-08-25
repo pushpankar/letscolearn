@@ -15,4 +15,5 @@
 </ul>
 
 <span><%= link "Edit", to: cohort_path(@conn, :edit, @cohort) %></span>
+<span><%= link "Join", to: cohort_path(@conn, :join, @cohort), method: :post %></span>
 <span><%= link "Back", to: cohort_path(@conn, :index) %></span>

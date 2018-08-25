@@ -1,6 +1,7 @@
 defmodule LetsColearnWeb.CohortController do
   use LetsColearnWeb, :controller
 
+  require IEx
   alias LetsColearn.Cohorts
   alias LetsColearn.Cohorts.Cohort
 
@@ -66,9 +67,12 @@ defmodule LetsColearnWeb.CohortController do
   # Add a user to cohort
   def join(conn, %{"id" => id}) do
     maybe_user = Guardian.Plug.current_resource(conn)
+    IO.inspect(maybe_user)
     if maybe_user do
-      # IO.inspect(cohort)
-      # Cohorts.add_user_to_cohort(cohort, maybe_user)
+      Cohorts.get_cohort!(id)
+      |> Cohorts.add_user_to_cohort(maybe_user)
+
+      redirect(conn, to: home_path(conn, :index))
     else
       conn 
       |> redirect(to: session_path(conn, :new))
