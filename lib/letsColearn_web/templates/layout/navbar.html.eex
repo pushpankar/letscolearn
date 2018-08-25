@@ -1,0 +1,6 @@
+<nav class="navbar navbar-light bg-light">
+    <div class="justify-content-end">
+      <%= link "LetsColearn", to: home_path(@conn, :index), class: "navbar-brand" %>
+      <%= login_or_logout(@conn) %>
+    </div>
+</nav>
