@@ -57,4 +57,9 @@ defmodule LetsColearnWeb.CohortController do
     |> put_flash(:info, "Cohort deleted successfully.")
     |> redirect(to: cohort_path(conn, :index))
   end
+
+  def search(conn, %{"query" => query}) do
+    cohorts = Cohorts.search(query)
+    render(conn, "index.html", cohorts: cohorts)
+  end
 end

@@ -5,10 +5,12 @@ defmodule LetsColearnWeb.SessionController do
     alias LetsColearn.Accounts.User
     alias LetsColearn.Guardian
     alias LetsColearn.Accounts.Auth
+    require Logger
   
     def new(conn, _) do
         changeset = Accounts.change_user(%User{})
         maybe_user = Guardian.Plug.current_resource(conn)
+        IO.inspect(maybe_user)
         if maybe_user do
             redirect(conn, to: "/users")
         else

@@ -24,22 +24,27 @@ defmodule LetsColearnWeb.Router do
   scope "/", LetsColearnWeb do
     pipe_through :browser # Use the default browser stack
 
-    get "/", PageController, :index
     resources "/cohorts", CohortController
-    resources "/chats", ChatController
-  end
+    get "/cohorts/search", CohortController, :search
 
-  scope "/", LetsColearnWeb do
+
     pipe_through [:browser, :auth]
+
+    get "/", HomeController, :index
+
     resources "/users", UserController, only: [:new, :create]
-    # resources "/sessions", SessionController, only: [:new, :create, :delete],
-                                              # singleton: true
+
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
     delete "/logout", SessionController, :delete
     
     pipe_through [:ensure_authed_access]
     resources "/users", UserController, except: [:new, :create]
+    resources "/chats", ChatController
+  end
+
+  scope "/", LetsColearnWeb do
+
   end
 
   # Other scopes may use custom stacks.
