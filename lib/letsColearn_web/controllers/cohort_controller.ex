@@ -59,9 +59,20 @@ defmodule LetsColearnWeb.CohortController do
   end
 
   def search(conn, %{"query" => query}) do
-    IO.puts(query)
     cohorts = Cohorts.search(query)
     render(conn, "index.html", cohorts: cohorts)
+  end
+
+  # Add a user to cohort
+  def join(conn, %{"id" => id}) do
+    maybe_user = Guardian.Plug.current_resource(conn)
+    if maybe_user do
+      # IO.inspect(cohort)
+      # Cohorts.add_user_to_cohort(cohort, maybe_user)
+    else
+      conn 
+      |> redirect(to: session_path(conn, :new))
+    end
   end
 
 end

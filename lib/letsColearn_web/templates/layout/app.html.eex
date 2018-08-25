@@ -13,9 +13,11 @@
 
   <body>
     <div class="container">
-      <%= render "navbar.html", assigns %>
-      <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
-      <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
+      <header class="header">
+        <%= render "navbar.html", assigns %>
+      </header>
+      <p class="alert alert-info collapse" role="alert"><%= get_flash(@conn, :info) %></p>
+      <p class="alert alert-danger collapse" role="alert"><%= get_flash(@conn, :error) %></p>
 
       <main role="main">
         <%= render @view_module, @view_template, assigns %>

@@ -10,7 +10,6 @@ defmodule LetsColearnWeb.SessionController do
     def new(conn, _) do
         changeset = Accounts.change_user(%User{})
         maybe_user = Guardian.Plug.current_resource(conn)
-        IO.inspect(maybe_user)
         if maybe_user do
             redirect(conn, to: "/users")
         else
