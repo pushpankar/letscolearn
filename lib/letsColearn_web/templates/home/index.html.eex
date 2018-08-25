@@ -10,7 +10,7 @@
 
 <%# list Cohorts %>
 
-<%= if @user_cohorts do %>
+<%= if assigns[:user_cohorts] do %>
   <%= render LetsColearnWeb.CohortView, "index.html", cohorts: @user_cohorts, conn: @conn %>
 <% end %>
 
