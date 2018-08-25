@@ -22,15 +22,12 @@ defmodule LetsColearnWeb.Router do
   end
 
   scope "/", LetsColearnWeb do
-    pipe_through :browser # Use the default browser stack
-
-    resources "/cohorts", CohortController
-    post "/cohorts/search", CohortController, :search
-
-
     pipe_through [:browser, :auth]
 
     get "/", HomeController, :index
+
+    resources "/cohorts", CohortController
+    post "/cohorts/search", CohortController, :search
 
     resources "/users", UserController, only: [:new, :create]
 
