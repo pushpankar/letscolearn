@@ -59,7 +59,9 @@ defmodule LetsColearnWeb.CohortController do
   end
 
   def search(conn, %{"query" => query}) do
+    IO.puts(query)
     cohorts = Cohorts.search(query)
     render(conn, "index.html", cohorts: cohorts)
   end
+
 end

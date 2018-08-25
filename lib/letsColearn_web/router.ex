@@ -25,7 +25,7 @@ defmodule LetsColearnWeb.Router do
     pipe_through :browser # Use the default browser stack
 
     resources "/cohorts", CohortController
-    get "/cohorts/search", CohortController, :search
+    post "/cohorts/search", CohortController, :search
 
 
     pipe_through [:browser, :auth]

@@ -40,9 +40,9 @@ defmodule LetsColearn.Cohorts do
   """
   def get_cohort!(id), do: Repo.get!(Cohort, id) |> Repo.preload(:users)
 
-  def search_cohor(query_text) do
+  def search(query_text) do
     search_param = Enum.join(["%", query_text, "%"])
-    Repo.all(from u in Cohorts.Cohort, where: ilike(u.title, ^search_param))
+    Repo.all(from u in Cohort, where: ilike(u.title, ^search_param))
   end
 
   @doc """
