@@ -8,3 +8,4 @@
 </div>
 
 <script>window.cohort_id = "<%= @cohort_id %>";</script>
+<script>window.userToken = "<%= LetsColearn.Guardian.Plug.current_token(@conn) %>";</script>
