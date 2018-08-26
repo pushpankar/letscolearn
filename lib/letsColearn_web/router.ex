@@ -33,14 +33,15 @@ defmodule LetsColearnWeb.Router do
 
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
-    delete "/logout", SessionController, :delete
     
     pipe_through [:ensure_authed_access]
-    resources "/users", UserController, except: [:new, :create]
+    resources "/users", UserController, except: [:new, :create, :index, :delete]
     resources "/cohorts", CohortController, only: [] do
       get "/chats", ChatController, :index
     end
     post "/cohorts/join/:id", CohortController, :join
+
+    delete "/logout", SessionController, :delete
 
   end
 

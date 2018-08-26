@@ -19,5 +19,6 @@
 
 </ul>
 
-<span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
-<span><%= link "Back", to: user_path(@conn, :index) %></span>
+<%= if Auth.match_user(@conn, @user.id) do %>
+  <span><%= link "Edit", to: user_path(@conn, :edit, @user) %></span>
+<% end %>

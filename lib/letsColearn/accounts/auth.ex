@@ -1,8 +1,8 @@
 defmodule LetsColearn.Accounts.Auth do
     
     alias LetsColearn.Accounts
-    alias LetsColearn.Accounts.Credential
-    alias LetsColearn.Repo
+    alias LetsColearn.Cohorts
+    require IEx
     
     def authenticate(%{"password" => password, "email" => email}) do
         user = Accounts.get_user_by_email(String.downcase(email))
@@ -18,5 +18,25 @@ defmodule LetsColearn.Accounts.Auth do
             nil -> {:user_error, "User does not exist"}
             _   -> Comeonin.Bcrypt.checkpw(password, user.credential.password_hash)
         end
+    end
+
+    # @TODO maybe I can check user's cohort has cohort_id or not. That might be more efficent
+    def authorize(user, cohort_id) do
+        cohort = Cohorts.get_cohort!(cohort_id)
+        if Enum.any?(cohort.users, &(&1.id == user.id)) do
+            {:ok}
+        else
+            {:error}
+        end
+    end
+
+    def match_user(conn, user_id) do
+        user = Guardian.Plug.current_resource(conn)
+        if user.id == user_id do
+            true
+        else
+            false
+        end
+
     end
 end
