@@ -9,7 +9,7 @@ defmodule LetsColearnWeb.CohortChannel do
     # Do authorization
     def join("cohort:" <> cohort_id, _message, socket) do
         user = Guardian.Phoenix.Socket.current_resource(socket)
-        case Auth.authorize(user, cohort_id) do
+        case Auth.has_joined?(user, cohort_id) do
             {:ok} -> 
                 send(self(), {:after_join, {cohort_id, user}})
                 {:ok, Guardian.Phoenix.Socket.put_current_claims(socket, %{"cohort_id" => cohort_id})}

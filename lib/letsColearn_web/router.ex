@@ -26,7 +26,7 @@ defmodule LetsColearnWeb.Router do
 
     get "/", HomeController, :index
 
-    resources "/cohorts", CohortController
+    resources "/cohorts", CohortController, except: [:delete]
     post "/cohorts/search", CohortController, :search
 
     resources "/users", UserController, only: [:new, :create]

@@ -20,8 +20,20 @@ defmodule LetsColearn.Accounts.Auth do
         end
     end
 
+    def has_joined?(%{"conn" => conn, "cohort_id" => cohort_id}) do
+        cohort = Cohorts.get_cohort!(cohort_id)
+        user = Guardian.Plug.current_resource(conn)
+        IO.puts(cohort_id)
+        IO.puts(user.id)
+        if Enum.any?(cohort.users, &(&1.id == user.id)) do
+            true
+        else
+            false
+        end
+    end
+
     # @TODO maybe I can check user's cohort has cohort_id or not. That might be more efficent
-    def authorize(user, cohort_id) do
+    def has_joined?(user, cohort_id) do
         cohort = Cohorts.get_cohort!(cohort_id)
         if Enum.any?(cohort.users, &(&1.id == user.id)) do
             {:ok}
@@ -29,6 +41,7 @@ defmodule LetsColearn.Accounts.Auth do
             {:error}
         end
     end
+
 
     def match_user(conn, user_id) do
         user = Guardian.Plug.current_resource(conn)

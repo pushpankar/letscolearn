@@ -3,9 +3,12 @@ defmodule LetsColearnWeb.CohortController do
 
   alias LetsColearn.Cohorts
   alias LetsColearn.Cohorts.Cohort
+  alias LetsColearn.Guardian
+  alias LetsColearn.Accounts.Auth
 
-  def index(conn, %{"cohort_id": cohort_id}) do
-    render(conn, "index.html")
+  def index(conn, _params) do
+    cohorts = Cohorts.list_cohorts()
+    render(conn, "index.html", cohorts: cohorts)
   end
 
   def new(conn, _params) do
@@ -65,11 +68,14 @@ defmodule LetsColearnWeb.CohortController do
   # Add a user to cohort
   def join(conn, %{"id" => id}) do
     maybe_user = Guardian.Plug.current_resource(conn)
-    if maybe_user do
-      Cohorts.get_cohort!(id)
-      |> Cohorts.add_user_to_cohort(maybe_user)
-
-      redirect(conn, to: home_path(conn, :index))
+    if maybe_user  do
+      if !Auth.has_joined?(%{"conn" => conn, "cohort_id" => id}) do
+        Cohorts.get_cohort!(id)
+        |> Cohorts.add_user_to_cohort(maybe_user)
+        redirect(conn, to: home_path(conn, :index))
+      else
+        redirect(conn, to: cohort_chat_path(conn, :index, id))
+      end
     else
       conn 
       |> redirect(to: session_path(conn, :new))
