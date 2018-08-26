@@ -1,13 +1,11 @@
 defmodule LetsColearnWeb.CohortController do
   use LetsColearnWeb, :controller
 
-  require IEx
   alias LetsColearn.Cohorts
   alias LetsColearn.Cohorts.Cohort
 
-  def index(conn, _params) do
-    cohorts = Cohorts.list_cohorts()
-    render(conn, "index.html", cohorts: cohorts)
+  def index(conn, %{"cohort_id": cohort_id}) do
+    render(conn, "index.html")
   end
 
   def new(conn, _params) do

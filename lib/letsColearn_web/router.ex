@@ -37,7 +37,9 @@ defmodule LetsColearnWeb.Router do
     
     pipe_through [:ensure_authed_access]
     resources "/users", UserController, except: [:new, :create]
-    resources "/chats", ChatController
+    resources "/cohorts", CohortController, only: [] do
+      get "/chats", ChatController, :index
+    end
     post "/cohorts/join/:id", CohortController, :join
 
   end

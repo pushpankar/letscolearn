@@ -5,8 +5,6 @@ defmodule LetsColearnWeb.HomeController do
   alias LetsColearn.Repo
   alias LetsColearn.Cohorts
 
-  require Logger
-
   def index(conn, _params) do
     cohorts = Cohorts.list_cohorts()
 

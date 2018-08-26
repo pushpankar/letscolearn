@@ -11,12 +11,11 @@ defmodule LetsColearnWeb.SessionController do
         changeset = Accounts.change_user(%User{})
         maybe_user = Guardian.Plug.current_resource(conn)
         if maybe_user do
-            redirect(conn, to: "/users")
+            redirect(conn, to: "/")
         else
             render(conn, "new.html", changeset: changeset)
         end
     end
-  
   
     def create(conn, params) do
       Auth.authenticate(params)
@@ -33,7 +32,7 @@ defmodule LetsColearnWeb.SessionController do
       conn
       |> put_flash(:success, "Welcome back!")
       |> Guardian.Plug.sign_in(user)
-      |> redirect(to: "/users")
+      |> redirect(to: "/")
     end
   
     defp login_reply({:error, reason}, conn) do
