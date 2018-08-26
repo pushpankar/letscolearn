@@ -42,10 +42,6 @@ defmodule LetsColearnWeb.Router do
 
   end
 
-  scope "/", LetsColearnWeb do
-
-  end
-
   # Other scopes may use custom stacks.
   # scope "/api", LetsColearnWeb do
   #   pipe_through :api

@@ -54,9 +54,31 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("topic:subtopic", {})
+let channel = socket.channel("cohort:lobby", {})
 channel.join()
   .receive("ok", resp => { console.log("Joined successfully", resp) })
   .receive("error", resp => { console.log("Unable to join", resp) })
+
+channel.on('new_msg', function (payload) { // listen to the 'shout' event
+  var li = document.createElement("li"); // creaet new list item DOM element
+  li.className = "list-group-item"
+  var name = payload.name || 'guest';    // get name from payload or set default
+  li.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
+  ul.appendChild(li);                    // append to list
+});
+
+
+var ul = document.getElementById('msg-list');        // list of messages.
+var msg = document.getElementById('msg');            // message input field
+
+// "listen" for the [Enter] keypress event to send a message:
+msg.addEventListener('keypress', function (event) {
+  if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
+    channel.push('new_msg', { // send the message to the server on "shout" channel
+      message: msg.value    // get message text (value) from msg input field.
+    });
+    msg.value = '';         // reset the message input field for next message.
+  }
+});
 
 export default socket

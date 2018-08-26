@@ -19,9 +19,21 @@ defmodule LetsColearnWeb.UserSocket do
   #
   # See `Phoenix.Token` documentation for examples in
   # performing token verification on connect.
-  def connect(_params, socket) do
-    {:ok, socket}
+  def connect(%{"token" => token} = params, socket) do
+    case Guardian.Phoenix.Socket.authenticate(socket, LetsColearn.Guardian, token) do
+      {:ok, authed_socket} ->
+        {:ok, authed_socket}
+      {:error, _} -> :error
+    end
   end
+
+  # This function will be called when there was no authentication information
+  def connect(_params, socket) do
+    :error
+  end
+  # def connect(_params, socket) do
+  #   {:ok, socket}
+  # end
 
   # Socket id's are topics that allow you to identify all sockets for a given user:
   #
