@@ -9,7 +9,9 @@ defmodule LetsColearnWeb.CohortChannel do
     def join("cohort:" <> cohort_id, _message, socket) do
         user = Guardian.Phoenix.Socket.current_resource(socket)
         case authorize(user, cohort_id) do
-            {:ok} -> {:ok, Guardian.Phoenix.Socket.put_current_claims(socket, %{"cohort_id" => cohort_id})}
+            {:ok} -> 
+                send(self(), {:after_join, {cohort_id, user}})
+                {:ok, Guardian.Phoenix.Socket.put_current_claims(socket, %{"cohort_id" => cohort_id})}
             {:error} -> {:error, {:reason, "You need to join group"}}
         end
     end
@@ -24,6 +26,16 @@ defmodule LetsColearnWeb.CohortChannel do
         |> Cohorts.create_chat
 
         broadcast! socket, "new_msg", %{message: msg, name: user.username}
+        {:noreply, socket}
+    end
+
+    def handle_info({:after_join, {cohort_id, user}}, socket) do
+        Cohorts.list_chat_in_cohort(cohort_id)
+        |> Enum.reverse
+        |> Enum.each(fn msg -> push(socket, "new_msg", %{
+            name: user.username,
+            message: msg.message
+        }) end)
         {:noreply, socket}
     end
 

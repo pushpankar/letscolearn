@@ -130,8 +130,17 @@ defmodule LetsColearn.Cohorts do
       [%Chat{}, ...]
 
   """
-  def list_chats do
-    Repo.all(Chat)
+  def list_chats(limit \\ 20) do
+    Repo.all(Chat, limit: limit)
+  end
+
+  def list_chat_in_cohort(cohort_id, limit \\ 100) do
+    query = from c in Chat, 
+                order_by: [desc: c.inserted_at],
+                limit: ^limit,
+                where: c.cohort_id == ^cohort_id
+
+    Repo.all(query)
   end
 
   @doc """
