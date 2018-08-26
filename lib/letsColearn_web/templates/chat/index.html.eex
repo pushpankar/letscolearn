@@ -6,3 +6,5 @@
     <input type="text" id="msg" class="form-control" placeholder="Your Message" autofocus>
   </div>
 </div>
+
+<script>window.cohort_id = "<%= @cohort_id %>";</script>

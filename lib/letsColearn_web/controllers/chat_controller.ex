@@ -5,6 +5,6 @@ defmodule LetsColearnWeb.ChatController do
   alias LetsColearn.Cohorts.Chat
 
   def index(conn, %{"cohort_id" => id}) do
-    render(conn, "index.html")
+    render(conn, "index.html", cohort_id: id)
   end
 end
