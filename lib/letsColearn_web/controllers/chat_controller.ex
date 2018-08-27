@@ -5,6 +5,9 @@ defmodule LetsColearnWeb.ChatController do
   alias LetsColearn.Cohorts.Chat
   alias LetsColearn.Accounts.Auth
 
+  plug :put_layout, "chat.html"
+
+
   # Authentication is being done in socket
   def index(conn, %{"cohort_id" => id}) do
     if Auth.has_joined?(%{"conn" => conn, "cohort_id" => id}) do

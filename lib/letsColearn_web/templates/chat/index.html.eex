@@ -1,15 +1,15 @@
 <!-- The list of messages will appear here: -->
-<div class="row">
-    <div class="col-md-6">
+<div class="row h-80">
+    <div class="col-md-6 h-100">
         <h2> <%= @cohort.title %> </h2>
         <p> <%= @cohort.description %> </p>
     </div>
-    <div class="col-md-6">
-        <ul id='msg-list' class='row list-group'></ul>
+    <div class="col-md-6 h-100">
+        <div class="chat-container">
+            <ul id='msg-list' class='row list-group bottom-margin'></ul>
+        </div>
 
-        <nav class="navbar fixed-bottom navbar-light bg-light">
-            <input type="text" id="msg" class="form-control" placeholder="Message" autofocus>
-        </nav>
+        <input type="text" id="msg" class="form-control chat-inp" placeholder="Message" autofocus>
     </div>
 </div>
 
