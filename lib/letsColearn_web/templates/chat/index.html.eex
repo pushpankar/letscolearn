@@ -1,11 +1,17 @@
 <!-- The list of messages will appear here: -->
-<ul id='msg-list' class='row list-group'></ul>
-
 <div class="row">
-  <div class="col-xs-9">
-    <input type="text" id="msg" class="form-control" placeholder="Your Message" autofocus>
-  </div>
+    <div class="col-md-6">
+        <h2> <%= @cohort.title %> </h2>
+        <p> <%= @cohort.description %> </p>
+    </div>
+    <div class="col-md-6">
+        <ul id='msg-list' class='row list-group'></ul>
+
+        <nav class="navbar fixed-bottom navbar-light bg-light">
+            <input type="text" id="msg" class="form-control" placeholder="Message" autofocus>
+        </nav>
+    </div>
 </div>
 
-<script>window.cohort_id = "<%= @cohort_id %>";</script>
+<script>window.cohort_id = "<%= @cohort.id %>";</script>
 <script>window.userToken = "<%= LetsColearn.Guardian.Plug.current_token(@conn) %>";</script>
