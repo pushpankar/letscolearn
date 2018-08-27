@@ -18,7 +18,7 @@ defmodule LetsColearn.Cohorts do
       [%Cohort{}, ...]
 
   """
-  def list_cohorts do
+  def list_cohorts(limit \\ 7) do
     Cohort
     |> Repo.all()
     |> Repo.preload(:users)
@@ -40,9 +40,9 @@ defmodule LetsColearn.Cohorts do
   """
   def get_cohort!(id), do: Repo.get!(Cohort, id) |> Repo.preload(:users)
 
-  def search(query_text) do
+  def search(query_text, limit \\ 50) do
     search_param = Enum.join(["%", query_text, "%"])
-    Repo.all(from u in Cohort, where: ilike(u.title, ^search_param))
+    Repo.all(from u in Cohort, where: ilike(u.title, ^search_param), limit: ^limit)
   end
 
   @doc """
@@ -134,7 +134,7 @@ defmodule LetsColearn.Cohorts do
     Repo.all(Chat, limit: limit)
   end
 
-  def list_chat_in_cohort(cohort_id, limit \\ 100) do
+  def list_chat_in_cohort(cohort_id, limit \\ 300) do
     query = from c in Chat, 
                 order_by: [desc: c.inserted_at],
                 limit: ^limit,

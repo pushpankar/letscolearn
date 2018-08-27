@@ -7,7 +7,7 @@ defmodule LetsColearnWeb.CohortController do
   alias LetsColearn.Accounts.Auth
 
   def index(conn, _params) do
-    cohorts = Cohorts.list_cohorts()
+    cohorts = Cohorts.list_cohorts(50)
     render(conn, "index.html", cohorts: cohorts)
   end
 
