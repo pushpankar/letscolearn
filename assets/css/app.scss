@@ -29,6 +29,10 @@
   max-height: calc(100% - 60px);
   overflow: auto;
 }
+.chat-msg {
+  padding: 20px;
+  margin: 10px;
+}
 #msg-list {
   max-height: 100%;
 }

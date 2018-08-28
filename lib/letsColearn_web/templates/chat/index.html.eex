@@ -2,7 +2,7 @@
 <div class="row h-80">
     <div class="col-md-6 h-100">
         <h2> <%= @cohort.title %> </h2>
-        <p> <%= @cohort.description %> </p>
+        <p id="cohort-description"> <%= @cohort.description %> </p>
     </div>
     <div class="col-md-6 h-100">
         <div class="chat-container" id="chat-container">

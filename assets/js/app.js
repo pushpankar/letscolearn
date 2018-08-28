@@ -19,4 +19,10 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
-$("#chat-container").animate({scrollTop: $('#chat-container').prop("scrollHeight")}, 1000)
+var d = $('#chat-container');
+d.scrollTop(d.prop("scrollHeight"));
+
+var display_txt = $("#cohort-description").text();
+display_txt = display_txt.replace(/\n/g, "<br />");
+console.log(display_txt);
+$("#cohort-description").html(display_txt);

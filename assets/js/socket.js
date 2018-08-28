@@ -61,10 +61,10 @@ channel.join()
 
 channel.on('new_msg', function (payload) { // listen to the 'shout' event
   var chat_msg = document.createElement("div"); // creaet new list item DOM element
-  chat_msg.className = "chat-msg"
+  chat_msg.className = "chat-msg bg-light rounded shadow-sm p-3"
   var name = payload.name || 'guest';    // get name from payload or set default
   chat_msg.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
-  $("#chat-container").append(chat_msg)
+  $("#chat-container").append(chat_msg);
   var d = $('#chat-container');
   d.scrollTop(d.prop("scrollHeight"));
 });
