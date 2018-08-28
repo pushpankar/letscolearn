@@ -60,12 +60,13 @@ channel.join()
   .receive("error", resp => { console.log("Unable to join", resp) })
 
 channel.on('new_msg', function (payload) { // listen to the 'shout' event
-  var li = document.createElement("li"); // creaet new list item DOM element
-  li.className = "list-group-item"
+  var chat_msg = document.createElement("div"); // creaet new list item DOM element
+  chat_msg.className = "chat-msg"
   var name = payload.name || 'guest';    // get name from payload or set default
-  li.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
-  ul.appendChild(li);                    // append to list
-  $("#msg-list").animate({scrollTop: $('#msg-list').prop("scrollHeight")}, "slow")
+  chat_msg.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
+  $("#chat-container").append(chat_msg)
+  var d = $('#chat-container');
+  d.scrollTop(d.prop("scrollHeight"));
 });
 
 

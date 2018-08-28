@@ -26,6 +26,20 @@
   height: 100%;
 }
 .chat-container {
-  height: calc(100% - 60px);
-  overflow-y: scroll;
+  max-height: calc(100% - 60px);
+  overflow: auto;
+}
+#msg-list {
+  max-height: 100%;
+}
+.list-group {
+  margin: 10px;
+  overflow: auto;
+}
+
+.list-group-item {
+  float: left;
+  border: 0 !important;
+  margin: 0px;
+  padding: 10px 0px;
 }

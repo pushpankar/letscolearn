@@ -19,4 +19,4 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 import socket from "./socket"
-$("#chat-container").animate({scrollTop: $('#chat-container').prop("scrollHeight") + 50}, "slow")
+$("#chat-container").animate({scrollTop: $('#chat-container').prop("scrollHeight")}, 1000)
