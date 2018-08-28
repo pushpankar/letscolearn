@@ -2,4 +2,4 @@
 
 <%= render "form.html", Map.put(assigns, :action, cohort_path(@conn, :update, @cohort)) %>
 
-<span><%= link "Back", to: cohort_path(@conn, :index) %></span>
+<span><%= link "Home", to: home_path(@conn, :index) %></span>

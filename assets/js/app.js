@@ -22,7 +22,9 @@ import socket from "./socket"
 var d = $('#chat-container');
 d.scrollTop(d.prop("scrollHeight"));
 
-var display_txt = $("#cohort-description").text();
-display_txt = display_txt.replace(/\n/g, "<br />");
-console.log(display_txt);
-$("#cohort-description").html(display_txt);
+var text = $("#cohort-description").text().trim();
+console.log(text);
+var converter   = new showdown.Converter();
+var html        = converter.makeHtml(text);
+console.log(html);
+$("#cohort-description").html(html);
