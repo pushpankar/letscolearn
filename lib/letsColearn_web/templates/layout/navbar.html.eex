@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-light">
+<nav class="navbar navbar-light bg-light">
       <%= link "LetsColearn", to: home_path(@conn, :index), class: "navbar-brand navbar-nav" %>
       <div class="navbar-nav ml-auto">
         <%= login_or_logout(@conn) %>

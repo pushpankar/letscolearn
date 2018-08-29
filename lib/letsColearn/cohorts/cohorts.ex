@@ -19,8 +19,8 @@ defmodule LetsColearn.Cohorts do
 
   """
   def list_cohorts(limit \\ 7) do
-    Cohort
-    |> Repo.all()
+    query = from c in Cohort, order_by: [desc: c.updated_at], limit: ^limit
+    Repo.all(query)
     |> Repo.preload(:users)
   end
 
@@ -131,7 +131,10 @@ defmodule LetsColearn.Cohorts do
 
   """
   def list_chats(limit \\ 20) do
-    Repo.all(Chat, limit: limit)
+    IO.inspect(limit)
+    Chat
+    |> limit(^limit)
+    |> Repo.all
   end
 
   def list_chat_in_cohort(cohort_id, limit \\ 300) do

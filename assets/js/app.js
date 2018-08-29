@@ -23,8 +23,6 @@ var d = $('#chat-container');
 d.scrollTop(d.prop("scrollHeight"));
 
 var text = $("#cohort-description").text().trim();
-console.log(text);
 var converter   = new showdown.Converter();
 var html        = converter.makeHtml(text);
-console.log(html);
 $("#cohort-description").html(html);

@@ -51,7 +51,6 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 // Finally, pass the token on connect as below. Or remove it
 // from connect if you don't care about authentication.
 
-socket.connect()
 
 // Now that you are connected, you can join channels with a topic:
 let channel = socket.channel("cohort:" + window.cohort_id, {})
@@ -69,8 +68,6 @@ channel.on('new_msg', function (payload) { // listen to the 'shout' event
   d.scrollTop(d.prop("scrollHeight"));
 });
 
-
-var ul = document.getElementById('msg-list');        // list of messages.
 var msg = document.getElementById('msg');            // message input field
 
 // "listen" for the [Enter] keypress event to send a message:
@@ -83,4 +80,9 @@ msg.addEventListener('keypress', function (event) {
   }
 });
 
+// This is temperorary solution. Using socket across all pages causes unneccessary 
+// connection requests. 
+// ####################### @TODO ########################
+// ####### This is a very bad solution ##################
+socket.connect()
 export default socket

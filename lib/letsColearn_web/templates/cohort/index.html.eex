@@ -16,11 +16,11 @@
       <td><%= cohort.description %></td>
 
       <td class="text-right">
-        <span><%= link "Show", to: cohort_path(@conn, :show, cohort), class: "btn btn-default btn-xs" %></span>
+        <span><%= link "Detail", to: cohort_path(@conn, :show, cohort), class: "btn btn-primary btn-xs" %></span>
       </td>
     </tr>
 <% end %>
   </tbody>
 </table>
 
-<span><%= link "New Cohort", to: cohort_path(@conn, :new) %></span>
+<span><%= link "Create new cohort", to: cohort_path(@conn, :new) %></span>
