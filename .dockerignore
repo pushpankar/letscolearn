@@ -2,3 +2,5 @@
 .elasticbeanstalk/*
 .git
 .gitignore
+assets/package-lock.json
+assets/node_modules
