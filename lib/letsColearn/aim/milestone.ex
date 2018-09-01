@@ -2,10 +2,14 @@ defmodule LetsColearn.Aim.Milestone do
   use Ecto.Schema
   import Ecto.Changeset
 
+  alias LetsColearn.Aim.{Goal, Comment, Resource}
 
   schema "milestones" do
     field :milestone, :string
-    field :goal_id, :id
+    belongs_to :goal, Goal
+    has_many :resources, Resource
+    has_many :comments, Comment
+    
 
     timestamps()
   end
@@ -13,7 +17,7 @@ defmodule LetsColearn.Aim.Milestone do
   @doc false
   def changeset(milestone, attrs) do
     milestone
-    |> cast(attrs, [:milestone])
-    |> validate_required([:milestone])
+    |> cast(attrs, [:milestone, :goal_id])
+    |> validate_required([:milestone, :goal_id])
   end
 end

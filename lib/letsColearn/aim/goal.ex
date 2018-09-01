@@ -4,11 +4,12 @@ defmodule LetsColearn.Aim.Goal do
 
 
   schema "goals" do
+    field :start_date, :naive_datetime
     field :end_date, :naive_datetime
     field :goal, :string
     field :pre_requisites, :string
-    field :start_date, :naive_datetime
-    field :user_id, :id
+    belongs_to :user, LetsColearn.Accounts.User # creator
+    has_many :milestones, LetsColearn.Aim.Milestone
 
     timestamps()
   end

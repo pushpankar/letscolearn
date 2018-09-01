@@ -5,8 +5,8 @@ defmodule LetsColearn.Aim.Resource do
 
   schema "resources" do
     field :resource, :string
-    field :user_id, :id
-    field :milestone_id, :id
+    belongs_to :user, LetsColearn.Accounts.User
+    belongs_to :milestone, LetsColearn.Aim.Milestone
 
     timestamps()
   end
@@ -14,7 +14,7 @@ defmodule LetsColearn.Aim.Resource do
   @doc false
   def changeset(resource, attrs) do
     resource
-    |> cast(attrs, [:resource])
-    |> validate_required([:resource])
+    |> cast(attrs, [:resource, :user_id, :milestone_id])
+    |> validate_required([:resource, :user_id, :milestone_id])
   end
 end
