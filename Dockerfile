@@ -35,6 +35,7 @@ RUN MIX_ENV=prod mix phx.digest
 
 
 # Install app
+RUN cd deps/bcrypt_elixir && make clean && make
 RUN MIX_ENV=prod mix compile
 
 # Exposes this port from the docker container to the host machine
