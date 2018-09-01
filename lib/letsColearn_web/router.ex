@@ -24,6 +24,11 @@ defmodule LetsColearnWeb.Router do
   scope "/", LetsColearnWeb do
     pipe_through [:browser, :auth]
 
+    resources "/goals", GoalController
+    resources "/milestones", MilestoneController
+    resources "/resources", ResourceController
+    resources "/comments", CommentController
+
     get "/", HomeController, :index
 
     resources "/cohorts", CohortController, except: [:delete]

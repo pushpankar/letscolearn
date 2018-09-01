@@ -1,0 +1,28 @@
+<h2>Show Goal</h2>
+
+<ul>
+
+  <li>
+    <strong>Start date:</strong>
+    <%= @goal.start_date %>
+  </li>
+
+  <li>
+    <strong>End date:</strong>
+    <%= @goal.end_date %>
+  </li>
+
+  <li>
+    <strong>Goal:</strong>
+    <%= @goal.goal %>
+  </li>
+
+  <li>
+    <strong>Pre requisites:</strong>
+    <%= @goal.pre_requisites %>
+  </li>
+
+</ul>
+
+<span><%= link "Edit", to: goal_path(@conn, :edit, @goal) %></span>
+<span><%= link "Back", to: goal_path(@conn, :index) %></span>
