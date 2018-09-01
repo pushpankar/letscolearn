@@ -3,9 +3,9 @@ defmodule LetsColearn.Repo.Migrations.CreateComments do
 
   def change do
     create table(:comments) do
-      add :comment, :text
-      add :user_id, references(:users, on_delete: :nothing)
-      add :milestone_id, references(:milestones, on_delete: :nothing)
+      add :comment, :text, null: false
+      add :user_id, references(:users, on_delete: :nothing), null: false
+      add :milestone_id, references(:milestones, on_delete: :nothing), null: false
 
       timestamps()
     end

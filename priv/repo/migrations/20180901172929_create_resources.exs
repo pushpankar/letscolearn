@@ -3,9 +3,9 @@ defmodule LetsColearn.Repo.Migrations.CreateResources do
 
   def change do
     create table(:resources) do
-      add :resource, :text
-      add :user_id, references(:users, on_delete: :nothing)
-      add :milestone_id, references(:milestones, on_delete: :nothing)
+      add :resource, :text, null: false
+      add :user_id, references(:users, on_delete: :nothing), null: false
+      add :milestone_id, references(:milestones, on_delete: :nothing), null: false
 
       timestamps()
     end

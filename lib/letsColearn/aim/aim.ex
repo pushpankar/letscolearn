@@ -4,6 +4,7 @@ defmodule LetsColearn.Aim do
   """
 
   import Ecto.Query, warn: false
+  alias LetsColearn.Guardian
   alias LetsColearn.Repo
 
   alias LetsColearn.Aim.Goal

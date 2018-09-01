@@ -8,7 +8,7 @@ defmodule LetsColearn.Aim.Goal do
     field :end_date, :naive_datetime
     field :goal, :string
     field :pre_requisites, :string
-    belongs_to :user, LetsColearn.Accounts.User # creator
+    belongs_to :creator, LetsColearn.Accounts.User, foreign_key: :user_id # creator
     has_many :milestones, LetsColearn.Aim.Milestone
 
     timestamps()
