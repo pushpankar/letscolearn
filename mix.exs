@@ -41,6 +41,7 @@ defmodule LetsColearn.Mixfile do
       {:phoenix_live_reload, "~> 1.0", only: :dev},
       {:gettext, "~> 0.11"},
       {:cowboy, "~> 1.0"},
+      {:bcrypt_elixir, "~> 1.0"},
       {:comeonin, "~> 2.5"},
       {:guardian, "~> 1.0"},
       {:distillery, "~> 2.0"}
