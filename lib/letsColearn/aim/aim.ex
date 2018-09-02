@@ -344,9 +344,11 @@ defmodule LetsColearn.Aim do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_comment(attrs \\ %{}) do
+  def create_comment(attrs \\ %{}, milestone, user) do
     %Comment{}
     |> Comment.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:milestone, Ecto.Changeset.change(milestone))
+    |> Ecto.Changeset.put_assoc(:user, Ecto.Changeset.change(user))
     |> Repo.insert()
   end
 

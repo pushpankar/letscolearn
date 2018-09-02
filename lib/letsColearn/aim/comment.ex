@@ -14,7 +14,7 @@ defmodule LetsColearn.Aim.Comment do
   @doc false
   def changeset(comment, attrs) do
     comment
-    |> cast(attrs, [:comment, :user_id, :milestone_id])
-    |> validate_required([:comment, :user_id, :milestone_id])
+    |> cast(attrs, [:comment])
+    |> validate_required([:comment])
   end
 end
