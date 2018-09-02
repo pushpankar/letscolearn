@@ -19,7 +19,9 @@ defmodule LetsColearn.Aim do
 
   """
   def list_goals do
-    Repo.all(Goal)
+    Goal
+    |> Repo.all()
+    |> Repo.preload(:creator)
   end
 
   @doc """
@@ -36,7 +38,7 @@ defmodule LetsColearn.Aim do
       ** (Ecto.NoResultsError)
 
   """
-  def get_goal!(id), do: Repo.get!(Goal, id)
+  def get_goal!(id), do: Repo.get!(Goal, id) |> Repo.preload(:creator)
 
   @doc """
   Creates a goal.
@@ -50,9 +52,10 @@ defmodule LetsColearn.Aim do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_goal(attrs \\ %{}) do
+  def create_goal(attrs \\ %{}, user_changeset) do
     %Goal{}
     |> Goal.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:creator, user_changeset)
     |> Repo.insert()
   end
 
@@ -68,9 +71,10 @@ defmodule LetsColearn.Aim do
       {:error, %Ecto.Changeset{}}
 
   """
-  def update_goal(%Goal{} = goal, attrs) do
+  def update_goal(%Goal{} = goal, attrs, user_changeset) do
     goal
     |> Goal.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:creator, user_changeset)
     |> Repo.update()
   end
 

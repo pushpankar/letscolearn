@@ -1,8 +1,10 @@
 defmodule LetsColearnWeb.GoalController do
   use LetsColearnWeb, :controller
 
-  alias LetsColearn.Aim
+  alias LetsColearn.{Aim, Repo}
   alias LetsColearn.Aim.Goal
+  alias LetsColearn.Accounts.Auth
+  alias LetsColearn.Guardian
 
   def index(conn, _params) do
     goals = Aim.list_goals()
@@ -10,12 +12,18 @@ defmodule LetsColearnWeb.GoalController do
   end
 
   def new(conn, _params) do
-    changeset = Aim.change_goal(%Goal{})
-    render(conn, "new.html", changeset: changeset)
+    if Guardian.Plug.current_resource(conn) do
+      changeset = Aim.change_goal(%Goal{})
+      render(conn, "new.html", changeset: changeset)
+    else
+      redirect(conn, to: "/login")
+    end
   end
 
+  # Checking authentication is not required as create route is not exposed to unauthenticated user.
   def create(conn, %{"goal" => goal_params}) do
-    case Aim.create_goal(goal_params) do
+    user_changeset = Guardian.Plug.current_resource(conn) |> Ecto.Changeset.change
+    case Aim.create_goal(goal_params, user_changeset) do
       {:ok, goal} ->
         conn
         |> put_flash(:info, "Goal created successfully.")
@@ -26,7 +34,7 @@ defmodule LetsColearnWeb.GoalController do
   end
 
   def show(conn, %{"id" => id}) do
-    goal = Aim.get_goal!(id)
+    goal = Aim.get_goal!(id) |> Repo.preload(:milestones)
     render(conn, "show.html", goal: goal)
   end
 
@@ -39,22 +47,33 @@ defmodule LetsColearnWeb.GoalController do
   def update(conn, %{"id" => id, "goal" => goal_params}) do
     goal = Aim.get_goal!(id)
 
-    case Aim.update_goal(goal, goal_params) do
-      {:ok, goal} ->
-        conn
-        |> put_flash(:info, "Goal updated successfully.")
-        |> redirect(to: goal_path(conn, :show, goal))
-      {:error, %Ecto.Changeset{} = changeset} ->
-        render(conn, "edit.html", goal: goal, changeset: changeset)
+    if Auth.creator?(conn, goal) do
+      user_changeset = Guardian.Plug.current_resource(conn) |> Ecto.Changeset.change
+
+      case Aim.update_goal(goal, goal_params, user_changeset) do
+        {:ok, goal} ->
+          conn
+          |> put_flash(:info, "Goal updated successfully.")
+          |> redirect(to: goal_path(conn, :show, goal))
+        {:error, %Ecto.Changeset{} = changeset} ->
+          render(conn, "edit.html", goal: goal, changeset: changeset)
+      end
+    else
+      redirect(conn, "/")
     end
   end
 
   def delete(conn, %{"id" => id}) do
     goal = Aim.get_goal!(id)
-    {:ok, _goal} = Aim.delete_goal(goal)
+    if Auth.creator?(conn, goal) do
+      {:ok, _goal} = Aim.delete_goal(goal)
 
-    conn
-    |> put_flash(:info, "Goal deleted successfully.")
-    |> redirect(to: goal_path(conn, :index))
+      conn
+      |> put_flash(:info, "Goal deleted successfully.")
+      |> redirect(to: goal_path(conn, :index))
+    else
+      redirect(conn, to: "/")
+    end
   end
+
 end

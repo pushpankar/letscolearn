@@ -24,7 +24,7 @@ defmodule LetsColearnWeb.Router do
   scope "/", LetsColearnWeb do
     pipe_through [:browser, :auth]
 
-    resources "/goals", GoalController
+    resources "/goals", GoalController, only: [:index, :new, :show]
     resources "/milestones", MilestoneController
     resources "/resources", ResourceController
     resources "/comments", CommentController
@@ -41,6 +41,11 @@ defmodule LetsColearnWeb.Router do
     
     pipe_through [:ensure_authed_access]
     resources "/users", UserController, except: [:new, :create, :index, :delete]
+    resources "/goals", GoalController, except: [:index, :show, :new]
+
+
+
+
     resources "/cohorts", CohortController, only: [] do
       get "/chats", ChatController, :index
     end

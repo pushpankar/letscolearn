@@ -2,6 +2,7 @@ defmodule LetsColearn.Accounts.Auth do
     
     alias LetsColearn.Accounts
     alias LetsColearn.Cohorts
+    alias LetsColearn.Aim.Goal
     require IEx
     
     def authenticate(%{"password" => password, "email" => email}) do
@@ -50,6 +51,12 @@ defmodule LetsColearn.Accounts.Auth do
         else
             false
         end
-
     end
+
+    def creator?(conn, %Goal{} = goal) do
+        maybe_user = Guardian.Plug.current_resource(conn)
+        !!maybe_user and maybe_user.id == goal.creator.id
+    end
+
+
 end
