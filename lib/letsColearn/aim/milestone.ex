@@ -17,7 +17,7 @@ defmodule LetsColearn.Aim.Milestone do
   @doc false
   def changeset(milestone, attrs) do
     milestone
-    |> cast(attrs, [:milestone, :goal_id])
-    |> validate_required([:milestone, :goal_id])
+    |> cast(attrs, [:milestone])
+    |> validate_required([:milestone])
   end
 end

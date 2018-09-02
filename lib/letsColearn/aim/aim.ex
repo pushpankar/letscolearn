@@ -6,6 +6,7 @@ defmodule LetsColearn.Aim do
   import Ecto.Query, warn: false
   alias LetsColearn.Guardian
   alias LetsColearn.Repo
+  require IEx
 
   alias LetsColearn.Aim.Goal
 
@@ -150,9 +151,10 @@ defmodule LetsColearn.Aim do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_milestone(attrs \\ %{}) do
+  def create_milestone(attrs \\ %{}, goal_changeset) do
     %Milestone{}
     |> Milestone.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:goal, goal_changeset)
     |> Repo.insert()
   end
 
