@@ -1,5 +1,5 @@
-<h2><%= @milestone.milestone %> </h2>
-
+<h3> <%= @milestone.milestone %> </h3>
+<%= link "back", to: goal_milestone_path(@conn, :index, @milestone.goal), class: "btn btn-std btn-xs" %>
 <ul>
   <%= for comment <- @milestone.comments do %>
     <li>

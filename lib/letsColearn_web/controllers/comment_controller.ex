@@ -5,7 +5,7 @@ defmodule LetsColearnWeb.CommentController do
   alias LetsColearn.Aim.Comment
 
   def index(conn, %{"milestone_id" => id}) do
-    milestone = Aim.get_milestone!(id) |> Repo.preload(:comments)
+    milestone = Aim.get_milestone!(id) |> Repo.preload(:comments) |> Repo.preload(:goal)
     render(conn, "index.html", milestone: milestone)
   end
 
