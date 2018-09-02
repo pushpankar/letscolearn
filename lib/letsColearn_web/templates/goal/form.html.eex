@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :pre_requisites, class: "control-label" %>
+    <%= label f, :prerequisites, class: "control-label" %>
     <%= textarea f, :pre_requisites, class: "form-control" %>
     <%= error_tag f, :pre_requisites %>
   </div>
