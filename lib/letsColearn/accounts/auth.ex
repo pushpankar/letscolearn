@@ -3,7 +3,9 @@ defmodule LetsColearn.Accounts.Auth do
     alias LetsColearn.Accounts
     alias LetsColearn.Cohorts
     alias LetsColearn.Aim.Goal
+    alias LetsColearn.Repo
     require IEx
+    import Ecto.Query, only: [from: 2]
     
     def authenticate(%{"password" => password, "email" => email}) do
         user = Accounts.get_user_by_email(String.downcase(email))
@@ -21,28 +23,15 @@ defmodule LetsColearn.Accounts.Auth do
         end
     end
 
-    def has_joined?(%{"conn" => conn, "cohort_id" => cohort_id}) do
-        cohort = Cohorts.get_cohort!(cohort_id)
+    def has_joined?(conn, goal) do
         user = Guardian.Plug.current_resource(conn)
-        IO.puts(cohort_id)
-        IO.puts(user.id)
-        if Enum.any?(cohort.users, &(&1.id == user.id)) do
+        query = from u in LetsColearn.Aim.GoalUser, where: u.user_id == ^user.id and u.goal_id == ^goal.id
+        if !!user and length(Repo.all(query)) > 0 do
             true
         else
             false
         end
     end
-
-    # @TODO maybe I can check user's cohort has cohort_id or not. That might be more efficent
-    def has_joined?(user, cohort_id) do
-        cohort = Cohorts.get_cohort!(cohort_id)
-        if Enum.any?(cohort.users, &(&1.id == user.id)) do
-            {:ok}
-        else
-            {:error}
-        end
-    end
-
 
     def match_user(conn, user_id) do
         user = Guardian.Plug.current_resource(conn)

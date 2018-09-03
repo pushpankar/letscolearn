@@ -1,5 +1,10 @@
 <h2><%= @goal.goal %> </h2>
-<div><%= link "Join", to: goal_path(@conn, :join, @goal), method: :post, class: "btn btn-std btn-xs"  %>
+
+<%= if Auth.has_joined?(@conn, @goal) do %>
+  <div> Joined </div>
+<%= else %>
+  <div><%= link "Join", to: goal_path(@conn, :join, @goal), method: :post, class: "btn btn-std btn-xs" %> </div>
+<% end %>
 
 <ul>
   <%= for milestone <- @goal.milestones do %>
