@@ -14,10 +14,6 @@
     <tr>
       <td><%= link goal.goal, to: goal_milestone_path(@conn, :index, goal), class: "btn btn-default btn-xs" %></td>
       <td><%= goal.pre_requisites %></td>
-
-      <td class="text-right">
-        <span><%= link "Delete", to: goal_path(@conn, :delete, goal), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
     </tr>
 <% end %>
   </tbody>

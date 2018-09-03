@@ -4,7 +4,6 @@
   <%= for comment <- @milestone.comments do %>
     <li>
       <%= comment.comment %> 
-      <span><%= link "delete", to: milestone_comment_path(@conn, :delete, @milestone, comment), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
     </li>
   <% end %>
 </ul>

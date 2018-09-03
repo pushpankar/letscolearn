@@ -27,7 +27,7 @@ defmodule LetsColearnWeb.GoalController do
       {:ok, goal} ->
         conn
         |> put_flash(:info, "Goal created successfully.")
-        |> redirect(to: goal_path(conn, :show, goal))
+        |> redirect(to: goal_milestone_path(conn, :index, goal))
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, "new.html", changeset: changeset)
     end

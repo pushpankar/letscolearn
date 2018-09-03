@@ -5,7 +5,6 @@
   <%= for resource <- @milestone.resources do %>
     <li>
       <%= resource.resource %> 
-      <span><%= link "delete", to: milestone_resource_path(@conn, :delete, @milestone, resource), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
     </li>
   <% end %>
 </ul>
