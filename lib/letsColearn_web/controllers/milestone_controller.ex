@@ -3,7 +3,7 @@ defmodule LetsColearnWeb.MilestoneController do
 
   alias LetsColearn.Aim
   alias LetsColearn.Aim.Milestone
-  alias LetsColearn.Repo
+  alias LetsColearn.{Repo, Guardian}
 
   def index(conn, %{"goal_id" => id}) do
     goal = Aim.get_goal!(id) |> Repo.preload(:milestones)
@@ -36,4 +36,5 @@ defmodule LetsColearnWeb.MilestoneController do
     |> put_flash(:info, "Milestone deleted successfully.")
     |> redirect(to: goal_milestone_path(conn, :index, goal_id))
   end
+
 end

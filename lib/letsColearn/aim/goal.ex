@@ -10,6 +10,7 @@ defmodule LetsColearn.Aim.Goal do
     field :pre_requisites, :string
     belongs_to :creator, LetsColearn.Accounts.User, foreign_key: :user_id # creator
     has_many :milestones, LetsColearn.Aim.Milestone
+    many_to_many :users, LetsColearn.Accounts.User, join_through: LetsColearn.Aim.GoalUser
 
     timestamps()
   end

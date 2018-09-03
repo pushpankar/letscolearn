@@ -76,4 +76,18 @@ defmodule LetsColearnWeb.GoalController do
     end
   end
 
+  def join(conn, %{"id" => id}) do
+    user = Guardian.Plug.current_resource(conn)
+    goal =  Aim.get_goal!(id) 
+    case Aim.join_goal(goal, user) do
+      {:ok, _} -> 
+        conn
+        |> put_flash(:info, "Joined successfully.")
+        |> redirect(to: goal_milestone_path(conn, :index, goal))
+      {:error, _} ->
+        conn
+        |> put_flash(:info, "Please report bug.")
+        |> redirect(to: goal_milestone_path(conn, :index, goal))
+    end
+  end
 end

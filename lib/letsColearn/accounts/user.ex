@@ -13,7 +13,7 @@ defmodule LetsColearn.Accounts.User do
 
     has_many :comments, Aim.Comment
     has_many :resources, Aim.Resource
-    many_to_many :cohorts, Cohort, join_through: "users_cohorts"
+    many_to_many :goals, Aim.Goal, join_through: LetsColearn.Aim.GoalUser
     has_many :chats, Chat
 
     timestamps()

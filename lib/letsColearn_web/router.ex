@@ -51,6 +51,8 @@ defmodule LetsColearnWeb.Router do
     resources "/goals", GoalController, except: [:index, :show, :delete] do
       resources "/milestones", MilestoneController, only: [:new, :create]
     end
+    post "/goals/:id/join", GoalController, :join
+
     resources "/milestones", MilestoneController, only: [] do
       resources "/resources", ResourceController, only: [:new, :create]
       resources "/comments", CommentController, only: [:new, :create]

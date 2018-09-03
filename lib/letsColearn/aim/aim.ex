@@ -8,7 +8,8 @@ defmodule LetsColearn.Aim do
   alias LetsColearn.Repo
   require IEx
 
-  alias LetsColearn.Aim.Goal
+  alias LetsColearn.Aim.{Goal, GoalUser}
+  alias LetsColearn.Accounts.User
 
   @doc """
   Returns the list of goals.
@@ -93,6 +94,11 @@ defmodule LetsColearn.Aim do
   """
   def delete_goal(%Goal{} = goal) do
     Repo.delete(goal)
+  end
+
+  def join_goal(%Goal{} = goal, %User{} = user) do
+      GoalUser.changeset(%GoalUser{}, %{goal_id: goal.id, user_id: user.id})
+      |> Repo.insert
   end
 
   @doc """
