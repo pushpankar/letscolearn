@@ -1,26 +1,13 @@
-<h2>Listing Resources</h2>
+<h2><%= @milestone.milestone %> </h2>
+<%= link "back", to: goal_milestone_path(@conn, :index, @milestone.goal), class: "btn btn-std btn-xs" %>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Resource</th>
+<ul>
+  <%= for resource <- @milestone.resources do %>
+    <li>
+      <%= resource.resource %> 
+      <span><%= link "delete", to: milestone_resource_path(@conn, :delete, @milestone, resource), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+    </li>
+  <% end %>
+</ul>
 
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-<%= for resource <- @resources do %>
-    <tr>
-      <td><%= resource.resource %></td>
-
-      <td class="text-right">
-        <span><%= link "Show", to: resource_path(@conn, :show, resource), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Edit", to: resource_path(@conn, :edit, resource), class: "btn btn-default btn-xs" %></span>
-        <span><%= link "Delete", to: resource_path(@conn, :delete, resource), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
-      </td>
-    </tr>
-<% end %>
-  </tbody>
-</table>
-
-<span><%= link "New Resource", to: resource_path(@conn, :new) %></span>
+<span><%= link "Add", to: milestone_resource_path(@conn, :new, @milestone), class: "btn btn-primary btn-xs" %></span>

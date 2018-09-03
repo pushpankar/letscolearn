@@ -9,5 +9,5 @@
 
 </ul>
 
-<span><%= link "Edit", to: resource_path(@conn, :edit, @resource) %></span>
-<span><%= link "Back", to: resource_path(@conn, :index) %></span>
+<%# <span><%= link "Edit", to: resource_path(@conn, :edit, @resource)</span> %> %>
+<%# <span><%= link "Back", to: resource_path(@conn, :index) %></span> %>

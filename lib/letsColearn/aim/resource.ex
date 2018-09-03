@@ -14,7 +14,7 @@ defmodule LetsColearn.Aim.Resource do
   @doc false
   def changeset(resource, attrs) do
     resource
-    |> cast(attrs, [:resource, :user_id, :milestone_id])
-    |> validate_required([:resource, :user_id, :milestone_id])
+    |> cast(attrs, [:resource])
+    |> validate_required([:resource])
   end
 end

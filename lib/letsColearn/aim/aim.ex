@@ -248,9 +248,11 @@ defmodule LetsColearn.Aim do
       {:error, %Ecto.Changeset{}}
 
   """
-  def create_resource(attrs \\ %{}) do
+  def create_resource(attrs \\ %{}, milestone, user) do
     %Resource{}
     |> Resource.changeset(attrs)
+    |> Ecto.Changeset.put_assoc(:milestone, Ecto.Changeset.change(milestone))
+    |> Ecto.Changeset.put_assoc(:user, Ecto.Changeset.change(user))
     |> Repo.insert()
   end
 

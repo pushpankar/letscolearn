@@ -5,6 +5,8 @@
     <li>
       <%= milestone.milestone %> 
       <span><%= link "delete", to: goal_milestone_path(@conn, :delete, @goal, milestone), method: :delete, data: [confirm: "Are you sure?"], class: "btn btn-danger btn-xs" %></span>
+      <div><%= link "comments", to: milestone_comment_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+      <div><%= link "resources", to: milestone_resource_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
     </li>
   <% end %>
 </ul>
