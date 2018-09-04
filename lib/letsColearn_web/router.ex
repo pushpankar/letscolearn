@@ -32,20 +32,11 @@ defmodule LetsColearnWeb.Router do
       resources "/comments", CommentController, only: [:index]
     end
 
-    get "/", HomeController, :index
+    # get "/", HomeController, :index
     resources "/users", UserController, only: [:new, :create]
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create
 
-
-    ################### TO BE DELETED ##################
-    resources "/cohorts", CohortController, except: [:delete]
-    post "/cohorts/search", CohortController, :search
-    ################### TO BE DELETED ##################
-
-
-
-    
     pipe_through [:ensure_authed_access]
     resources "/users", UserController, except: [:new, :create, :index, :delete]
     resources "/goals", GoalController, except: [:index, :show, :delete] do
@@ -59,16 +50,6 @@ defmodule LetsColearnWeb.Router do
     end
 
     delete "/logout", SessionController, :delete
-
-
-    ################### TO BE DELETED ##################
-    resources "/cohorts", CohortController, only: [] do
-      get "/chats", ChatController, :index
-    end
-    post "/cohorts/join/:id", CohortController, :join
-    ################### TO BE DELETED ##################
-
-
   end
 
   # Other scopes may use custom stacks.

@@ -3,7 +3,6 @@ defmodule LetsColearn.Accounts.User do
   import Ecto.Changeset
 
   alias LetsColearn.Accounts.Credential
-  alias LetsColearn.Cohorts.{Cohort, Chat, Resource}
   alias LetsColearn.Aim
 
   schema "users" do
@@ -14,7 +13,6 @@ defmodule LetsColearn.Accounts.User do
     has_many :comments, Aim.Comment
     has_many :resources, Aim.Resource
     many_to_many :goals, Aim.Goal, join_through: LetsColearn.Aim.GoalUser
-    has_many :chats, Chat
 
     timestamps()
   end
