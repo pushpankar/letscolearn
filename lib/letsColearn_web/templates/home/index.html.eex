@@ -1,0 +1,7 @@
+<ul>
+  <%= for goal <- @goals do %>
+    <li>
+      <%= link goal.goal, to: goal_milestone_path(@conn, :index, goal), class: "btn btn-default btn-xs" %>
+    </li>
+  <% end %>
+</ul>

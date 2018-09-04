@@ -1,1 +1,1 @@
-<%= link "Logout", to: session_path(@conn, :delete), method: :delete, class: "navbar-nav ml-auto" %>
+<%= link "Logout", to: session_path(@conn, :delete), method: :delete, class: "btn btn-outline-success my-2 my-sm-0" %>

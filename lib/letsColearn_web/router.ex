@@ -32,7 +32,8 @@ defmodule LetsColearnWeb.Router do
       resources "/comments", CommentController, only: [:index]
     end
 
-    # get "/", HomeController, :index
+    get "/", HomeController, :index
+    get "/my", HomeController, :my
     resources "/users", UserController, only: [:new, :create]
     get    "/login",  SessionController, :new
     post   "/login",  SessionController, :create

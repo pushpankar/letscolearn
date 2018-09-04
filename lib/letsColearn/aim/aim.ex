@@ -45,7 +45,8 @@ defmodule LetsColearn.Aim do
   def user_goals(user) do
     query = from g in Goal,
                 join: u in assoc(g, :users),
-                where: u.id == ^user.id
+                where: u.id == ^user.id,
+                order_by: g.start_date
     Repo.all(query)
   end
 
