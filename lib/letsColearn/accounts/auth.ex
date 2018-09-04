@@ -25,9 +25,9 @@ defmodule LetsColearn.Accounts.Auth do
 
     def has_joined?(conn, goal) do
         user = Guardian.Plug.current_resource(conn)
-        query = from u in LetsColearn.Aim.GoalUser, where: u.user_id == ^user.id and u.goal_id == ^goal.id
-        if !!user and length(Repo.all(query)) > 0 do
-            true
+        if !!user do
+            query = from u in LetsColearn.Aim.GoalUser, where: u.user_id == ^user.id and u.goal_id == ^goal.id
+            length(Repo.all(query)) > 0 
         else
             false
         end
