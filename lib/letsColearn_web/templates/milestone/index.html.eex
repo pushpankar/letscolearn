@@ -10,8 +10,10 @@
   <%= for milestone <- @goal.milestones do %>
     <li>
       <%= milestone.milestone %> 
-      <div><%= link "comments", to: milestone_comment_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
-      <div><%= link "resources", to: milestone_resource_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+      <div>
+        <%= link "24 " <>"comments", to: milestone_comment_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+        <%= link "resources", to: milestone_resource_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+      </div>
     </li>
   <% end %>
 </ul>
