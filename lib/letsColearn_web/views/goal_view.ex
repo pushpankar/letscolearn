@@ -1,4 +1,4 @@
-defmodule LetsColearnWeb.CohortView do
+defmodule LetsColearnWeb.GoalView do
   use LetsColearnWeb, :view
   alias LetsColearn.Accounts.Auth
 end

@@ -1,0 +1,6 @@
+<h2> <%= @milestone.milestone %></h2>
+
+<%= render "form.html", Map.put(assigns, :action, milestone_resource_path(@conn, :create, @milestone)) %>
+
+<span><%= link "Back", to: milestone_resource_path(@conn, :index, @milestone) %></span>
+

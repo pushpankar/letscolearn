@@ -1,0 +1,12 @@
+<h2><%= @milestone.milestone %> </h2>
+<%= link "back", to: goal_milestone_path(@conn, :index, @milestone.goal), class: "btn btn-std btn-xs" %>
+
+<ul>
+  <%= for resource <- @milestone.resources do %>
+    <li>
+      <%= resource.resource %> 
+    </li>
+  <% end %>
+</ul>
+
+<span><%= link "Add", to: milestone_resource_path(@conn, :new, @milestone), class: "btn btn-primary btn-xs" %></span>

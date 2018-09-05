@@ -20,7 +20,7 @@ defmodule LetsColearn.Accounts do
   def list_users do
     User
     |> Repo.all()
-    |> Repo.preload([:credential, :cohorts])
+    |> Repo.preload([:credential])
   end
 
   @doc """
@@ -40,7 +40,7 @@ defmodule LetsColearn.Accounts do
   def get_user!(id) do
     User
     |> Repo.get!(id)
-    |> Repo.preload([:credential, :cohorts])
+    |> Repo.preload([:credential])
   end
 
   @doc """

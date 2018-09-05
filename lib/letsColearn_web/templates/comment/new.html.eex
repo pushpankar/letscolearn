@@ -1,0 +1,5 @@
+<h2> <%= @milestone.milestone %></h2>
+
+<%= render "form.html", Map.put(assigns, :action, milestone_comment_path(@conn, :create, @milestone)) %>
+
+<span><%= link "Back", to: milestone_comment_path(@conn, :index, @milestone) %></span>

@@ -3,8 +3,8 @@ defmodule LetsColearn.Repo.Migrations.CreateUsers do
 
   def change do
     create table(:users) do
-      add :name, :string
-      add :username, :string
+      add :name, :string, null: false
+      add :username, :string, null: false
 
       timestamps()
     end
