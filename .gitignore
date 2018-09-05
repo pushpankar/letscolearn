@@ -29,3 +29,8 @@ npm-debug.log
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
 !.elasticbeanstalk/*.global.yml
+.DS_Store
+.elasticbeanstalk/
+Archive 2.zip
+Archive.zip
+rel/

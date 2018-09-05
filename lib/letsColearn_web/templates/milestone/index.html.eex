@@ -1,0 +1,24 @@
+<div class="row">
+  <h5 class="col-10">Goal: <%= @goal.goal %> </h5>
+  <div class="col-2">
+    <%= if Auth.has_joined?(@conn, @goal) do %>
+      <div> Joined </div>
+    <%= else %>
+      <div><%= link "Join", to: goal_path(@conn, :join, @goal), method: :post, class: "btn btn-std btn-xs" %> </div>
+    <% end %>
+  </div>
+</div>
+
+<ul>
+  <%= for milestone <- @goal.milestones do %>
+    <li>
+      <%= milestone.milestone %> 
+      <div>
+        <%= link comment_count(milestone) , to: milestone_comment_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+        <%= link resource_count(milestone) , to: milestone_resource_path(@conn, :index, milestone), class: "btn btn-std btn-xs" %> 
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<span><%= link "Add", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>

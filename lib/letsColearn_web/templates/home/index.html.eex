@@ -1,17 +1,8 @@
-<%= form_for @conn, cohort_path(@conn, :search), fn f-> %>
-    <div class="form-group">
-        <%= text_input f, :query, class: "form-control", placeholder: "I want to learn" %>
-    </div>
-
-    <div class="form-group">
-        <%= submit "Search", class: "btn btn-primary" %>
-    </div>
-<% end %>
-
-<%# list Cohorts %>
-
-<%= if assigns[:user_cohorts] do %>
-  <%= render "joined_cohorts.html", cohorts: @user_cohorts, conn: @conn %>
-<% end %>
-
-<%= render LetsColearnWeb.CohortView, "index.html", cohorts: @cohorts, conn: @conn %>
+<h5>My goals</h5>
+<ul>
+  <%= for goal <- @goals do %>
+    <li>
+      <%= link goal.goal, to: goal_milestone_path(@conn, :index, goal), class: "btn btn-default btn-xs" %>
+    </li>
+  <% end %>
+</ul>

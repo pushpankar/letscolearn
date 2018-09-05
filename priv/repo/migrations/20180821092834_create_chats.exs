@@ -3,9 +3,9 @@ defmodule LetsColearn.Repo.Migrations.CreateChats do
 
   def change do
     create table(:chats) do
-      add :message, :text
-      add :user_id, references(:users, on_delete: :nothing)
-      add :cohort_id, references(:cohorts, on_delete: :nothing)
+      add :message, :text, null: false
+      add :user_id, references(:users, on_delete: :nothing), null: false
+      add :cohort_id, references(:cohorts, on_delete: :nothing), null: false
 
       timestamps()
     end
