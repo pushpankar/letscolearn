@@ -1,9 +1,9 @@
-<h2>Listing Goals</h2>
+<h2>Explore Goals</h2>
 
 <table class="table">
   <thead>
     <tr>
-      <th>Goal</th>
+      <th>Goals</th>
       <th>Pre requisites</th>
 
       <th></th>

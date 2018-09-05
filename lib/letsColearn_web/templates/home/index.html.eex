@@ -1,3 +1,4 @@
+<h5>My goals</h5>
 <ul>
   <%= for goal <- @goals do %>
     <li>

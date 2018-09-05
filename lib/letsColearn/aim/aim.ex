@@ -333,6 +333,13 @@ defmodule LetsColearn.Aim do
     Resource.changeset(resource, %{})
   end
 
+  def resource_count(milestone) do
+    query = from r in Resource, where: r.milestone_id == ^milestone.id, select: count(r.id)
+    Repo.one(query)
+  end
+
+
+
   alias LetsColearn.Aim.Comment
 
   @doc """
@@ -430,4 +437,10 @@ defmodule LetsColearn.Aim do
   def change_comment(%Comment{} = comment) do
     Comment.changeset(comment, %{})
   end
+
+  def comment_count(milestone) do
+    query = from c in Comment, where: c.milestone_id == ^milestone.id, select: count(c.id)
+    Repo.one(query)
+  end
+
 end
