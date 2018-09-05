@@ -18,5 +18,3 @@
 <% end %>
   </tbody>
 </table>
-
-<span><%= link "New Goal", to: goal_path(@conn, :new) %></span>
