@@ -8,7 +8,13 @@
     <% end %>
   </div>
 </div>
-
+</br>
+<div >
+  From: <%= @goal.start_date %> </br> To: <%= @goal.end_date %>
+</div>
+</br>
+<h5>Instructions:</h5>
+<div><p> <%= @goal.pre_requisites %></p></div>
 <ul>
   <%= for milestone <- @goal.milestones do %>
     <li>
@@ -21,4 +27,4 @@
   <% end %>
 </ul>
 
-<span><%= link "Add", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>
+<span><%= link "Add a milestone", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>

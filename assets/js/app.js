@@ -18,11 +18,4 @@ import "phoenix_html"
 // Local files can be imported directly using relative
 // paths "./socket" or full ones "web/static/js/socket".
 
-import socket from "./socket"
-var d = $('#chat-container');
-d.scrollTop(d.prop("scrollHeight"));
-
-var text = $("#cohort-description").text().trim();
-var converter   = new showdown.Converter();
-var html        = converter.makeHtml(text);
-$("#cohort-description").html(html);
+// import socket from "./socket"

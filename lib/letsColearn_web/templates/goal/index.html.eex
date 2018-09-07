@@ -1,20 +1,6 @@
-<h2>Explore Goals</h2>
+<h4>Explore Goals</h4>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Goals</th>
-      <th>Pre requisites</th>
-
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
+<ul>
 <%= for goal <- @goals do %>
-    <tr>
-      <td><%= link goal.goal, to: goal_milestone_path(@conn, :index, goal), class: "btn btn-default btn-xs" %></td>
-      <td><%= goal.pre_requisites %></td>
-    </tr>
+  <li><%= link goal.goal, to: goal_milestone_path(@conn, :index, goal), class: "btn btn-default btn-xs" %></li>
 <% end %>
-  </tbody>
-</table>

@@ -31,7 +31,7 @@ defmodule LetsColearn.Aim do
   """
   def list_active_goals do
       query = from g in Goal,
-                where: g.end_date > ^NaiveDateTime.utc_now,
+                where: g.end_date > from_now(0, "day"),
                 order_by: g.start_date
       Repo.all(query)
       |> Repo.preload(:creator)
@@ -39,7 +39,7 @@ defmodule LetsColearn.Aim do
 
   def list_upcoming_goals do
       query = from g in Goal,
-                where: g.start_date > ^NaiveDateTime.utc_now,
+                where: g.start_date > from_now(0, "day"),
                 order_by: g.start_date
       Repo.all(query)
       |> Repo.preload(:creator)
