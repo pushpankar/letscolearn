@@ -26,9 +26,12 @@ defmodule LetsColearn.Aim do
     |> Repo.preload(:creator)
   end
 
+  @doc """
+    As of now, active means, those which have not ended
+  """
   def list_active_goals do
       query = from g in Goal,
-                where: g.start_date < ^NaiveDateTime.utc_now and g.end_date > ^NaiveDateTime.utc_now,
+                where: g.end_date > ^NaiveDateTime.utc_now,
                 order_by: g.start_date
       Repo.all(query)
       |> Repo.preload(:creator)
