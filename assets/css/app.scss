@@ -1,59 +1,6 @@
 /* This file is for your main application css. */
 @import "bootstrap";
 
-.bottom-margin {
-  margin-bottom: 70px;
-}
-
-.container {
-  width: 75%;
-}
-
-.chat-inp {
-  position: absolute;
-  bottom: 0;
-}
-
-.h-80 {
-  height: calc(100% - 100px)
-}
-
-.container-fluid-pad {
-  padding-left: 70px;
-  padding-right: 70px;
-  padding-bottom: 30px;
-  overflow: hidden;
-}
-
-#chat-ui-body {
-  overflow: hidden;
-  height: 100%;
-}
-.chat-container {
-  max-height: calc(100% - 60px);
-  overflow: auto;
-}
-.chat-msg {
-  padding: 20px;
-  margin: 10px;
-}
-#msg-list {
-  max-height: 100%;
-}
-.list-group {
-  margin: 10px;
-  overflow: auto;
-}
-
-.list-group-item {
-  float: left;
-  border: 0 !important;
-  margin: 0px;
-  padding: 10px 0px;
-}
-
-.description-container {
-  max-height: 100%;
-  overflow: auto;
-  padding: 100px;
+.fluid-container{
+  padding: 0% 12%;
 }

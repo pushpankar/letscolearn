@@ -5,8 +5,6 @@
 // and connect at the socket path in "lib/web/endpoint.ex":
 import {Socket} from "phoenix"
 
-let socket = new Socket("/socket", {params: {token: window.userToken}})
-
 // When you connect, you'll often need to authenticate the client.
 // For example, imagine you have an authentication plug, `MyAuth`,
 // which authenticates the session and assigns a `:current_user`.
@@ -53,36 +51,3 @@ let socket = new Socket("/socket", {params: {token: window.userToken}})
 
 
 // Now that you are connected, you can join channels with a topic:
-let channel = socket.channel("cohort:" + window.cohort_id, {})
-channel.join()
-  .receive("ok", resp => { console.log("Joined successfully", resp) })
-  .receive("error", resp => { console.log("Unable to join", resp) })
-
-channel.on('new_msg', function (payload) { // listen to the 'shout' event
-  var chat_msg = document.createElement("div"); // creaet new list item DOM element
-  chat_msg.className = "chat-msg bg-light rounded shadow-sm p-3"
-  var name = payload.name || 'guest';    // get name from payload or set default
-  chat_msg.innerHTML = '<b>' + name + '</b>: ' + payload.message; // set li contents
-  $("#chat-container").append(chat_msg);
-  var d = $('#chat-container');
-  d.scrollTop(d.prop("scrollHeight"));
-});
-
-var msg = document.getElementById('msg');            // message input field
-
-// "listen" for the [Enter] keypress event to send a message:
-msg.addEventListener('keypress', function (event) {
-  if (event.keyCode == 13 && msg.value.length > 0) { // don't sent empty msg.
-    channel.push('new_msg', { // send the message to the server on "shout" channel
-      message: msg.value    // get message text (value) from msg input field.
-    });
-    msg.value = '';         // reset the message input field for next message.
-  }
-});
-
-// This is temperorary solution. Using socket across all pages causes unneccessary 
-// connection requests. 
-// ####################### @TODO ########################
-// ####### This is a very bad solution ##################
-socket.connect()
-export default socket

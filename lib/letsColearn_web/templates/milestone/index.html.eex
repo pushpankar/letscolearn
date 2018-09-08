@@ -1,14 +1,20 @@
 <div class="row">
-  <h5 class="col-10">Goal: <%= @goal.goal %> </h5>
-  <div class="col-2">
-    <%= if Auth.has_joined?(@conn, @goal) do %>
-      <div> Joined </div>
-    <%= else %>
-      <div><%= link "Join", to: goal_path(@conn, :join, @goal), method: :post, class: "btn btn-std btn-xs" %> </div>
-    <% end %>
-  </div>
+  <%= if not Auth.has_joined?(@conn, @goal) do %>
+    <h5 class="col-8">Goal: <%= @goal.goal %> </h5>
+    <div class="col-2"><%= length @goal.users %> have joined </div>
+    <div class="col-2"><%= link "Join", to: goal_path(@conn, :join, @goal), method: :post, class: "btn btn-std btn-xs" %> </div>
+  <%= else %>
+    <h5 class="col-10">Goal: <%= @goal.goal %> </h5>
+    <div class="col-2"><%= length @goal.users %> have joined </div>
+  <% end %>
 </div>
-
+</br>
+<div >
+  <strong>From</strong>: <%= @goal.start_date %> </br> <strong>To</strong>: <%= @goal.end_date %>
+</div>
+</br>
+<h5>More info:</h5>
+<div><p> <%= @goal.pre_requisites %></p></div>
 <ul>
   <%= for milestone <- @goal.milestones do %>
     <li>
@@ -21,4 +27,4 @@
   <% end %>
 </ul>
 
-<span><%= link "Add", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>
+<span><%= link "Add a milestone", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>

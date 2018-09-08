@@ -1,12 +1,14 @@
 defmodule LetsColearnWeb.MilestoneController do
   use LetsColearnWeb, :controller
 
+  import Ecto.Query, warn: false
   alias LetsColearn.Aim
   alias LetsColearn.Aim.Milestone
   alias LetsColearn.{Repo, Guardian}
 
   def index(conn, %{"goal_id" => id}) do
-    goal = Aim.get_goal!(id) |> Repo.preload(:milestones)
+    query = 
+    goal = Aim.get_goal!(id) |> Repo.preload([milestones: from(m in Milestone, order_by: [asc: m.inserted_at])]) |> Repo.preload(:users)
     render(conn, "index.html", goal: goal)
   end
 

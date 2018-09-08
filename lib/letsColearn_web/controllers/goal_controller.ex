@@ -7,7 +7,7 @@ defmodule LetsColearnWeb.GoalController do
   alias LetsColearn.Guardian
 
   def index(conn, _params) do
-    goals = Aim.list_upcoming_goals()
+    goals = Aim.list_active_goals()
     render(conn, "index.html", goals: goals)
   end
 

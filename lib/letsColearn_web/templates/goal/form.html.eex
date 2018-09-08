@@ -7,13 +7,13 @@
 
   <div class="form-group">
     <%= label f, :start_date, class: "control-label" %>
-    <%= datetime_select f, :start_date, class: "form-control" %>
+    <%= date_select f, :start_date, class: "form-control" %>
     <%= error_tag f, :start_date %>
   </div>
 
   <div class="form-group">
     <%= label f, :end_date, class: "control-label" %>
-    <%= datetime_select f, :end_date, class: "form-control" %>
+    <%= date_select f, :end_date, class: "form-control" %>
     <%= error_tag f, :end_date %>
   </div>
 
@@ -24,7 +24,7 @@
   </div>
 
   <div class="form-group">
-    <%= label f, :prerequisites, class: "control-label" %>
+    <%= label f, :more_info, class: "control-label" %>
     <%= textarea f, :pre_requisites, class: "form-control" %>
     <%= error_tag f, :pre_requisites %>
   </div>

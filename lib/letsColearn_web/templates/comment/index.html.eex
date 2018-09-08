@@ -3,9 +3,9 @@
 <ul>
   <%= for comment <- @milestone.comments do %>
     <li>
-      <%= comment.comment %> 
+      <strong><%= comment.user.username %>:</strong> <%= comment.comment %> 
     </li>
   <% end %>
 </ul>
 
-<span><%= link "Add", to: milestone_comment_path(@conn, :new, @milestone), class: "btn btn-primary btn-xs" %></span>
+<span><%= link "Comment", to: milestone_comment_path(@conn, :new, @milestone), class: "btn btn-primary btn-xs" %></span>
