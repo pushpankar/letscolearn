@@ -15,7 +15,9 @@
 </br>
 <h5>More info:</h5>
 <div><p> <%= @goal.pre_requisites %></p></div>
-<ul>
+</br>
+<h5>Milestones</h5>
+<ol>
   <%= for milestone <- @goal.milestones do %>
     <li>
       <%= milestone.milestone %> 
@@ -25,6 +27,6 @@
       </div>
     </li>
   <% end %>
-</ul>
+</ol>
 
 <span><%= link "Add a milestone", to: goal_milestone_path(@conn, :new, @goal), class: "btn btn-primary btn-xs" %></span>
