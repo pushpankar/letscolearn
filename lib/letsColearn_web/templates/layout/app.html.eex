@@ -12,7 +12,7 @@
   </head>
 
   <body>
-    <div class="container">
+    <div class="fluid-container">
       <header class="header">
         <%= render "navbar.html", assigns %>
       </header>

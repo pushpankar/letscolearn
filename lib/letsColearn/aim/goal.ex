@@ -4,8 +4,8 @@ defmodule LetsColearn.Aim.Goal do
 
 
   schema "goals" do
-    field :start_date, :naive_datetime
-    field :end_date, :naive_datetime
+    field :start_date, :date
+    field :end_date, :date
     field :goal, :string
     field :pre_requisites, :string
     belongs_to :creator, LetsColearn.Accounts.User, foreign_key: :user_id # creator
