@@ -3,7 +3,7 @@ config :letsColearn, LetsColearnWeb.Endpoint,
   load_from_system_env: true,
   url: [host: {:system, "HOST"}, port: {:system, "PORT"}],
   server: true,
-  cache_static_manifest: "priv/static/cache_manifest.json",
+  cache_static_manifest: "priv/static/cache_manifest.json"
 
 config :letsColearn, LetsColearn.Repo,
     adapter: Ecto.Adapters.Postgres,
